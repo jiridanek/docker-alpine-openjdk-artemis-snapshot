@@ -2,25 +2,22 @@
 # Alpine Linux - AMQ7 snapshot Dockerfile
 #
 
-FROM alpine:latest
+FROM library/fedora:27
 
 MAINTAINER Jiri Danek <jdanek@redhat.com>
 
 USER root
 
-RUN apk update && apk upgrade && apk add \
-    su-exec \
-    tini \
-    openjdk8-jre-base \
+RUN yum install -y \
+    java-1.8.0-openjdk \
     libaio \
+    unzip \
     wget \
     grep \
-    && rm -rf /var/cache/apk/*
+    && yum clean all
 
-ENV JAVA_HOME /usr/lib/jvm/java-1.8-openjdk
-
-# create artemis user without password and home dir
-RUN addgroup -S amq7 && adduser -s /bin/false -D -H amq7 -G amq7
+# create artemis user
+RUN adduser amq7
 
 # Setup broker
 ADD setup_broker.sh ./
@@ -52,6 +49,6 @@ VOLUME ["/var/lib/amq7/etc"]
 WORKDIR /var/lib/amq7/bin
 
 COPY docker-entrypoint.sh /usr/local/bin/
-ENTRYPOINT ["/sbin/tini", "--", "docker-entrypoint.sh"]
+ENTRYPOINT ["docker-entrypoint.sh"]
 
 CMD ["amq7-server"]

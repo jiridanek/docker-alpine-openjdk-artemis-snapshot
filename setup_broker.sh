@@ -6,7 +6,7 @@ RELEASE='2.6.0'
 REPO="https://repository.apache.org/content/repositories/snapshots/org/apache/activemq/apache-artemis/${RELEASE}-SNAPSHOT/"
 VERSION=$(wget -O - -o /dev/null $REPO/maven-metadata.xml | grep -oP '(?<=<value>).*?(?=</value>)' | head -1)
 FILENAME="${PREFIX}-${VERSION}-bin.zip"
-mkdir /opt && cd /opt
+(mkdir /opt || true) && cd /opt
 wget -q $REPO/${FILENAME}
 wget -q $REPO/${FILENAME}.sha1
 # Verify
