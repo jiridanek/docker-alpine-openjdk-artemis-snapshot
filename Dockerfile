@@ -2,7 +2,7 @@
 # Alpine Linux - AMQ7 snapshot Dockerfile
 #
 
-FROM library/fedora:27
+FROM quay.io/fedora/fedora:34-x86_64
 
 MAINTAINER Jiri Danek <jdanek@redhat.com>
 
