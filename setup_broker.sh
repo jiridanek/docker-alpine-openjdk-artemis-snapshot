@@ -1,8 +1,9 @@
 #!/usr/bin/env sh
+set -Eeuxo pipefail
 
 # Set sources
 PREFIX='apache-artemis'
-RELEASE='2.26.0'
+RELEASE='2.27.0'
 REPO="https://repository.apache.org/content/repositories/snapshots/org/apache/activemq/apache-artemis/${RELEASE}-SNAPSHOT/"
 VERSION=$(wget -O - -o /dev/null $REPO/maven-metadata.xml | grep -oP '(?<=<value>).*?(?=</value>)' | head -1)
 FILENAME="${PREFIX}-${VERSION}-bin.zip"
