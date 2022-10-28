@@ -2,14 +2,14 @@
 # Alpine Linux - AMQ7 snapshot Dockerfile
 #
 
-FROM quay.io/fedora/fedora:34-x86_64
+FROM quay.io/fedora/fedora:36-x86_64
 
 MAINTAINER Jiri Danek <jdanek@redhat.com>
 
 USER root
 
 RUN yum install -y \
-    java-1.8.0-openjdk \
+    java-11-openjdk \
     libaio \
     patch \
     unzip \
